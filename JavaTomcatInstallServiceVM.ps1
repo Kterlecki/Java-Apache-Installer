@@ -28,8 +28,8 @@ Invoke-Command -Credential $Cred -ComputerName inputYourVMHere -ScriptBlock {
     Expand-Archive apache-tomcat-8.5.82-windows-x64.zip -DestinationPath "./" -Force
 
     # set environment variables - JAVA_HOME and CATALINA_HOME required for tomcat to function
-	[System.Environment]::SetEnvironmentalVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_202")
-	[System.Environment]::SetEnvironmentalVariable("Path", [System.Environment]::GetEnvironmentalVariable('Path', [System.EnvironmentVariableTarget]::Machine) + ";$($env:JAVA_HOME\bin)")
+	$Env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_202"
+    	$Env:Path += ";$($Env:JAVA_HOME)\bin"
 	$Env:CATALINA_HOME = "C:\Users\YOUR_USER\Documents \apache-tomcat-8.5.82"
 
     # Get java version
