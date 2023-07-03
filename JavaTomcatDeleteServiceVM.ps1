@@ -9,8 +9,8 @@ $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential -ArgumentList $user, $securePassword
 Invoke-Command -Credential $Cred -ComputerName inputYourVMHere -ScriptBlock {
 
-	[System.Environment]::SetEnvironmentalVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_202")
-	[System.Environment]::SetEnvironmentalVariable("Path", [System.Environment]::GetEnvironmentalVariable('Path', [System.EnvironmentVariableTarget]::Machine) + ";$($env:JAVA_HOME\bin)")
+	$Env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_202"
+    	$Env:Path += ";$($Env:JAVA_HOME)\bin"
 	$Env:CATALINA_HOME = "C:\Users\YOUR_USER\Documents \apache-tomcat-8.5.82"
 
 	Start-Process -FilePath "apache-tomcat-8.5.82\bin\shutdown.bat" -Wait
